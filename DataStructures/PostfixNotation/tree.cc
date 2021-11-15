@@ -1,4 +1,4 @@
-#include "tree.h"
+#include "tree.hh"
 
 void init(TTree& root)
 {
@@ -80,6 +80,17 @@ void attachRightSon(TTree root, char elem)
     }
 }
 
+void destroy(TTree& root)
+{
+    if (root != nullptr)
+    {
+        destroy(root->left);
+        destroy(root->right);
+        delete root;
+        root = nullptr;
+    }
+}
+
 char getRootData(TTree root)
 {
     if(!isEmpty(root))
@@ -113,13 +124,13 @@ void detachLeftTree(TTree root, TTree& leftTree)
     }
 }
 
-void detachRightTree(TTree root, TTree& leftTree)
+void detachRightTree(TTree root, TTree& rightTree)
 {
     if (isEmpty(root))
         std::cout << "Дерево пусто!\n";
     else
     {
-        leftTree = root->right;
+        rightTree = root->right;
         root->right = 0;
     }
 }

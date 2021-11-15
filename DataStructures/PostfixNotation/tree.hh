@@ -8,6 +8,8 @@ struct TreeNode
     char data;
     TreeNode* left;
     TreeNode* right;
+
+    TreeNode() : left{nullptr}, right{nullptr} {};
 };
 
 typedef TreeNode* TTree;
@@ -38,6 +40,9 @@ void attachRightSon(TTree, char);
 
 // Получение значения корня
 char getRootData(TTree);
+
+// Удаление дерева
+void destroy(TTree&);
 
 // Присваивание значения корню
 void setRootData(TTree&, char);
