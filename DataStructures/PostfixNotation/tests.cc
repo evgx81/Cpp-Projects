@@ -3,7 +3,6 @@
 #include <iostream>
 
 #include "stack.hh"
-#include "tree.hh"
 
 TEST(StackTests, isEmptyStack)
 {
@@ -69,4 +68,3 @@ TEST(StackTests, clear)
     bool flag = stack.isEmpty();
     EXPECT_EQ(flag, true);
 }
-
