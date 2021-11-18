@@ -10,3 +10,5 @@ There is a brief description to each directory:
     - Using BFS (Breadth First Search) to find the shortest way in a binary maze.
 - PostfixNotaion
     - Checking out the correctness of the postfix notation with the binary tree.
+- UsualPermutation
+    - Using STL containers to find substring of string 'a' permutation and string 'b' permutation.
