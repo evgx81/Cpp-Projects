@@ -6,7 +6,7 @@
 // Проверка на знак
 bool isSign(char sign)
 {
-    return (sign == '+' || sign == '*' || sign == '-') ? true : false;
+    return (sign == '+' || sign == '*') ? true : false;
 }
 
 // Проверка на операнд
@@ -35,6 +35,14 @@ bool CheckPostfixCorrectness(std::string postfix)
         {
             init(tree, ch);
             stack.push(tree);
+        }
+        else if (ch == '-')
+        {
+            init(tree, ch);
+            if(!stack.isEmpty())
+                attachLeftSubtree(tree, stack.peek());
+            else
+                flag = false;
         }
         // Если символ является знаком
         else
