@@ -49,10 +49,16 @@ int main()
                 }
             }
 
-            // Выводим исходную строку
-            for (auto elem : x)
-                std::cout << elem;
-            std::cout << '\n';
+            if (!x.empty())
+            {
+                // Выводим исходную строку
+                for (auto elem : x)
+                    std::cout << elem;
+                std::cout << '\n';
+            }
+            else    
+                std::cout << "В перестановках строк нет одинаковых символов\n";
+            
         }
 
         fin.close();
