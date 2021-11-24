@@ -25,17 +25,19 @@ public:
     // Конструктор копирования
     Set(const Set<T>&);
     ~Set();
-public:
+public: // Модификаторы
     // Включение элемента в множество
     void insert(const T&);
     // Исключение элемента из множества
     void erase(const T&);
+public:  
     // Объединение множеств
     Set<T> set_union(const Set<T>&);
     // Пересечение множеств
     Set<T> set_intersection(const Set<T>&);
     // Вычитание множеств
     Set<T> set_difference(const Set<T>&);
+public: // Наблюдатели
     // Отслеживание количества элементов
     int size();
     // Проверка присутствия элемента в множестве
