@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/home/evgx81/cpp/Cpp-Projects/Editions/build",
+  "command": "/bin/g++   -g -std=gnu++2a -o CMakeFiles/editions.dir/editions.cpp.o -c /home/evgx81/cpp/Cpp-Projects/Editions/editions.cpp",
+  "file": "/home/evgx81/cpp/Cpp-Projects/Editions/editions.cpp"
+}
+]
