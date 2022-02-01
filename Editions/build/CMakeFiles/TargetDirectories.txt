@@ -1,3 +1,0 @@
-/home/evgx81/cpp/Cpp-Projects/Editions/build/CMakeFiles/rebuild_cache.dir
-/home/evgx81/cpp/Cpp-Projects/Editions/build/CMakeFiles/edit_cache.dir
-/home/evgx81/cpp/Cpp-Projects/Editions/build/CMakeFiles/editions.dir
