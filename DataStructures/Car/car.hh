@@ -23,6 +23,11 @@ public:
     {
         return m_region == state_number.m_region && m_number == state_number.m_number;
     }
+    StateNumber& operator=(const StateNumber& state_number) {
+        m_region = state_number.m_region;
+        m_number = state_number.m_number;
+        return *this;
+    }
     // Вывод государственного номера   
     friend std::ostream& operator<<(std::ostream& os, const StateNumber& state_number)
     {
@@ -61,7 +66,9 @@ public:
     Car(std::string region, int number, std::string firm_name, std::string driver_name, int route_number, Condition condition) :
         m_state_number(region, number), m_firm_name(firm_name), m_driver_name(driver_name), m_route_number(route_number), m_condition(condition) {}
     Car(const Car&);
+    ~Car() {}
 public:
+    Car& operator=(const Car&);
     // Вывод полей машины
     friend std::ostream& operator<<(std::ostream&, const Car&);
     // Считывание полей машины

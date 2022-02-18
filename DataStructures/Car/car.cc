@@ -9,6 +9,16 @@ Car::Car(const Car& car)
     m_condition = car.m_condition;
 }
 
+Car& Car::operator=(const Car& car) 
+{
+    m_state_number = car.m_state_number;
+    m_firm_name = car.m_firm_name;
+    m_driver_name = car.m_driver_name;
+    m_route_number = car.m_route_number;
+    m_condition = car.m_condition;
+    return *this;
+}
+
 std::ostream& operator<<(std::ostream& os, const Car& car)
 {
     os << car.m_state_number << ' ' << car.m_firm_name << ' ' << car.m_driver_name << ' ' << car.m_route_number << car.m_condition;
