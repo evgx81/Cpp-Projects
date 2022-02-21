@@ -47,10 +47,10 @@ private:
     // Квадратичное опробирование
     int quadratic_probing(int);
     // Поиск индекса элемента с заданным ключом
-    int find_index_equal_key(TKey);
+    int find_elem_with_same_key(int, TKey);
 private:
     // Функция, которая будет увеличивать размер таблицы при заполненности хэш-таблицы выше 75% 
-    bool isFull() {return m_size >= m_capacity % 75;}
+    bool isFull() {return m_size >= m_capacity * 0.75;}
     // Автоматическое увеличение размерности хэш-таблицы в 2 раза
     void rehashing();
 public:
