@@ -29,24 +29,7 @@ int main()
     bool condition = true;
     char operation;
 
-    // Car test_car("MMM", 786213, "BMMO", "А.П.Репников", 16, ROUTE);
-    // hash_table.insert(test_car.get_key(), test_car);
-
-    // bool isRemoved = hash_table.remove(test_car.get_key());
-    // if (isRemoved == true)
-    //     std::cout << "Элемент успешно удален\n";
-    // else
-    //     std::cout << "Элемента с ключом: " << test_car.get_key() << " нет в таблице\n";
-
-    // try
-    // {
-    //     Car m_value = hash_table.get(test_car.get_key());
-    //     std::cout << "Элемент с заданным ключом: " << m_value << '\n';
-    // }
-    // catch(std::range_error err)
-    // {
-    //     std::cerr << err.what() << '\n'; 
-    // }
+  
 
     while(condition) 
     {
@@ -153,7 +136,7 @@ int main()
                 break;
             }
             case 'q': {
-                std::cout << "Вы закончили пользоваться калькулятором." << '\n';
+                std::cout << "Вы закончили пользоваться программой." << '\n';
                 condition = false;
                 break;
             }
