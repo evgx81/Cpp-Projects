@@ -24,60 +24,71 @@ QuadraticProbingTable::QuadraticProbingTable(const QuadraticProbingTable& table)
 QuadraticProbingTable::~QuadraticProbingTable()
 {
     delete[] m_table;
+    m_size = 0;
 }
 
 void QuadraticProbingTable::rehashing()
 {
-    // Чтобы пройтись по всем элементам старогомассива
+    // Чтобы пройтись по всем элементам старого массива
     int old_capacity = m_capacity;
+    // Увеличиваем размерность
     m_capacity = m_capacity * 2;
-    HashItem* new_hash_table = new HashItem[m_capacity];
+    m_size = 0;
 
+    HashItem* old_array = new HashItem[old_capacity];
+    for(int i = 0; i < old_capacity; i++)
+        old_array[i] = m_table[i];
+
+    delete[] m_table;
+    m_table = new HashItem[m_capacity];
     for(int i = 0; i < old_capacity; ++i)
     {
-        // Находим новые индексы для старых элементов в хэш-таблице, ячейки которых не пусты
-        if(m_table[i].m_status == FILLED)
+        // Запоняем новый массив индексами
+        if(old_array[i].m_status == FILLED)
         {
-            int index = hash(m_table[i].m_key);
-            if (new_hash_table[index].m_status == FILLED)
-            {
-
-                int j{1};
-                int newPosition{-1};
-                // Пока не обошли все ячейки новой таблицы
-                while(j <= m_capacity)
-                {
-                    newPosition = (index + j + j*j) % m_capacity;
-                    if (new_hash_table[newPosition].m_status == EMPTY)
-                        break;
-                    else
-                        j++;
-                }
-                new_hash_table[newPosition] = m_table[i];
-            }
-            else
-                new_hash_table[index] = m_table[i];    
-                
+            insert(old_array[i].m_key, old_array[i].m_value);
         }
 
     }
-
-    delete[] m_table;
-    m_table = new_hash_table;
 }
 
-int QuadraticProbingTable::find_elem_with_same_key(int hash_position, TKey key)
+bool QuadraticProbingTable::is_elem_in_table_with_quadratic_probing(int hash_position, TKey key)
+{
+    int i{};
+    int index{-1};
+    bool isFound = false;
+    // Пока не обошли все ячейки
+    while(i < m_capacity)
+    {
+        index = (hash_position + i + i*i) % m_capacity;
+        if (m_table[index].m_key == key && m_table[index].m_status != REMOVED)
+        {
+            isFound = true;
+            break;
+        }    
+        i++;
+    }
+
+    if (i == m_capacity) 
+        isFound = false;
+    return isFound;
+}
+
+int QuadraticProbingTable::find_index_elem_with_quadratic_probing(int hash_position, TKey key)
 {
     int i{};
     int index{-1};
     // Пока не обошли все ячейки
     while(i < m_capacity)
     {
-        index = (hash_position + i*i) % m_capacity;
-        if (m_table[index].m_key == key)
-            break;
+        index = (hash_position + i + i*i) % m_capacity;
+        if (m_table[index].m_key == key && m_table[index].m_status != REMOVED)
+            break;    
         i++;
     }
+
+    if (i == m_capacity)
+        index = -1;
     return index;
 }
 
@@ -89,11 +100,13 @@ int QuadraticProbingTable::quadratic_probing(int hash_position)
     while(i <= m_capacity)
     {
         newPosition = (hash_position + i + i*i) % m_capacity;
-        if (m_table[newPosition].m_status == EMPTY)
+        if (m_table[newPosition].m_status == EMPTY || m_table[newPosition].m_status == REMOVED)
             break;
         else
             i++;
     }
+    if (i == m_capacity) 
+        newPosition = -1;
     return newPosition;
 }
 
@@ -126,13 +139,12 @@ void QuadraticProbingTable::insert(TKey key, TValue value)
     else
     {
         int newPosition = quadratic_probing(position);
-        
         m_table[newPosition].m_value = value;
         m_table[newPosition].m_key = key;
         m_table[newPosition].m_status = FILLED;
         m_size++;
-    }
 
+    }
     
 }
 
@@ -140,39 +152,42 @@ bool QuadraticProbingTable::remove(TKey key)
 {
     int position = hash(key);
 
-    // Если элемента с данным ключом нет в таблице
-    if (find(key) == false)
-        return false;
-
-    if (m_table[position].m_status == FILLED)
+    if (m_table[position].m_status == EMPTY || m_table[position].m_status == REMOVED)
     {
         m_table[position].m_status = REMOVED;
         m_size--;
-        // Т.к элемент успешно удален
         return true;
     }
     else
     {
-        int index = find_elem_with_same_key(position, key);
+        int index = find_index_elem_with_quadratic_probing(position, key);
         if(index == -1)
             // Элемента с данным индексом нет в таблице
             return false;
-        else
-        {
-            m_table[index].m_status = REMOVED;
-            m_size--;
-            return true;
-        }
-        
+
+        m_table[index].m_status = REMOVED;
+        m_size--;
+        return true;
     }
+
 }
-    
+
+
 bool QuadraticProbingTable::find(TKey key)
 {
     int position = hash(key);
-    if (m_table[position].m_status == EMPTY || m_table[position].m_status == REMOVED)
+    bool isFound = m_table[position].m_status == FILLED;
+    
+    if (isFound == true)
+        return true;
+    else
+    {
+        isFound = is_elem_in_table_with_quadratic_probing(position, key);
+        if (isFound == true)
+            return true;
         return false;
-    return true;
+    }    
+
 }
 
 void QuadraticProbingTable::clear()
@@ -189,33 +204,19 @@ void QuadraticProbingTable::clear()
 
 TValue QuadraticProbingTable::get(TKey key)
 {
-    bool isFound = find(key);
     int position = hash(key);
+    bool isFound = m_table[position].m_status == FILLED;
 
     if(isFound == true)
         return m_table[position].m_value;
     else
     {
-        int i{};
-        int index{-1};
-        // Пока не обошли все ячейки
-        while(i < m_capacity)
-        {
-            index = (position + i*i) % m_capacity;
-            if (m_table[index].m_key == key)
-            {
-                isFound = true;
-                break;
-            }    
-            i++;
-        }
-
-        if(isFound == true)
+        int index = find_index_elem_with_quadratic_probing(position, key);
+        if(index != -1)
             return m_table[index].m_value;
         else
             throw std::range_error("There isn't an element with this key");
-
-    }
+    }    
 }
     
 bool QuadraticProbingTable::isEmpty()
@@ -230,7 +231,7 @@ int QuadraticProbingTable::size()
 
 void QuadraticProbingTable::print()
 {
-    if(m_size == 0)
+    if(isEmpty())
         std::cout << "Таблица пуста\n";
     else
     {

@@ -21,6 +21,12 @@ public:
     HashItem() : m_value{}, m_key{}, m_status{EMPTY} {}
     ~HashItem(){}
 public:
+    HashItem(const HashItem& hash_item)
+    {
+        m_value = hash_item.m_value;
+        m_key = hash_item.m_key;
+        m_status = hash_item.m_status;
+    }
     HashItem& operator=(const HashItem& hash_item) {
         m_value = hash_item.m_value;
         m_key = hash_item.m_key;
@@ -46,8 +52,10 @@ private:
     int hash(TKey);
     // Квадратичное опробирование
     int quadratic_probing(int);
-    // Поиск индекса элемента с заданным ключом
-    int find_elem_with_same_key(int, TKey);
+    // Проверка существует ли элемент с данным ключом в таблице с помощью квадратичного пробирования
+    bool is_elem_in_table_with_quadratic_probing(int, TKey);
+    // Поиск индекса, на котором находится элемент с помощью квадратичного пробирования
+    int find_index_elem_with_quadratic_probing(int, TKey);
 private:
     // Функция, которая будет увеличивать размер таблицы при заполненности хэш-таблицы выше 75% 
     bool isFull() {return m_size >= m_capacity * 0.75;}
