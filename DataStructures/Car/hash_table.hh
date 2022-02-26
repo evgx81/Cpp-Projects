@@ -23,7 +23,6 @@ public:
     virtual void print() = 0;
     // Очистка таблицы
     virtual void clear() = 0;
-    
 public:
     // Проверка пуста ли таблица
     virtual bool isEmpty() = 0;
