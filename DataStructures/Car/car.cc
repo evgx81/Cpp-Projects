@@ -21,7 +21,7 @@ Car& Car::operator=(const Car& car)
 
 std::ostream& operator<<(std::ostream& os, const Car& car)
 {
-    os << car.m_state_number << ' ' << car.m_firm_name << ' ' << car.m_driver_name << ' ' << car.m_route_number << car.m_condition;
+    os << car.m_state_number << ' ' << car.m_firm_name << ' ' << car.m_driver_name << ' ' << car.m_route_number<< ' ' << car.m_condition;
     return os;
 }
 
