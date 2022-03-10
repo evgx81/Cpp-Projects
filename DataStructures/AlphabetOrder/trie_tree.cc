@@ -89,8 +89,7 @@ void TrieTree::printTree(TreeNode* root, std::string str = "")
 {
     if (root->m_eow == true)
     {
-        std::cout << str << ' ';
-        std::cout << root->m_count << '\n';
+        std::cout << "Количество вхождени слова: " << str << " - " << root->m_count << '\n';
     }
     for (int i = 0; i < ALPHABET_SIZE; ++i)
     {
