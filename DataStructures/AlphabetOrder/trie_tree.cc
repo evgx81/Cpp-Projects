@@ -55,14 +55,16 @@ bool TrieTree::removeWord(TreeNode*& root, std::string key, int depth = 0)
         return false;
  
     // Если глубина погружения равна длине слова (достигли последнего символа)
-    if (depth == key.length()) {
+    if (depth == key.length()) 
+    {
  
         // Данная вершина больше не является концом слова
         if (root->m_eow == true)
             root->m_eow = false;
             
         // Если вершина не является префиксом какого-либо слова, то удаляем эту вершину
-        if (isEmpty(root)) {
+        if (isEmpty(root)) 
+        {
             delete root;
             root = nullptr;
         }
