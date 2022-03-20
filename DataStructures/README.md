@@ -16,3 +16,5 @@ There is a brief description to each directory:
     - Implementing operations with the hash_table with class 'Car' elements.  
 - AlphabeticalOrder
     - Printing all words in alphabetical order and the number of each word in the text.    
+- ColorGraph
+    - Coloring a general graph with the minimum number of colors.  
