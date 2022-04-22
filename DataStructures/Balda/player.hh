@@ -21,10 +21,14 @@ public:
     // Получаем лист, использованных игроком слов в игре
     std::list<std::string> get_words();
 public:
-    // Добавляем слово к листе слов игрока
+    // Добавляем слово к листу слов игрока
     void add_word(std::string);
     // Увеличиваем счет игрока на заданную величину
     void increase_score(int);
+    // Удаляем слово из листа слов игрока
+    void remove_word(std::string);
+    // Уменьшаем счет игрока на заданную величину
+    void decrease_score(int);
 public:
     friend std::ostream& operator<<(std::ostream&, const Player&);
 };
