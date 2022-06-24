@@ -22,3 +22,7 @@ There is a brief description to each directory:
     - Solving Nuts and Bolts Problem using quick sort.   
 - Password
     - Searching the password in the string by means of trie data structure.
+- TreeList
+    - Printing all subtrees which roots have '0' value.  
+- GraphMinimumSpanningTree
+    - Implemention of Prim's and Kruskal's algorithms to find minimum spanning tree.  
