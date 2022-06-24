@@ -20,3 +20,5 @@ There is a brief description to each directory:
     - Coloring a general graph with the minimum number of colors.  
 - NutsAndBolts
     - Solving Nuts and Bolts Problem using quick sort.   
+- Password
+    - Searching the password in the string by means of trie data structure.
