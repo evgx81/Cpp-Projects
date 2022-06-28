@@ -25,4 +25,6 @@ There is a brief description to each directory:
 - TreeList
     - Printing all subtrees which roots have '0' value.  
 - GraphMinimumSpanningTree
-    - Implemention of Prim's and Kruskal's algorithms to find minimum spanning tree.  
+    - Implemention of Prim's and Kruskal's algorithms to find minimum spanning tree.
+- N-QueensProblem
+    - Solution of N Queens Problem using backtracking algorithm.  
